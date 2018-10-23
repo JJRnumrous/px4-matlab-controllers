@@ -1,5 +1,5 @@
 % Get the latest log file from PX4
-log_dir = "/home/anton/DataFiles/Development/PX4/build/posix_sitl_default/logs/";
+log_dir = "/home/jjr/DataFiles/Development/PX4/PX4/build/posix_sitl_default/logs/";
 cmd_latest = strcat("find ", log_dir, " -type f -printf ""%T@ %p\n"" | sort -n | cut -d' ' -f 2- | tail -n 1");
 [status,latest_log] = system(cmd_latest);
 

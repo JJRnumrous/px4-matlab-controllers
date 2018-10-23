@@ -10,7 +10,7 @@ sim_freq = 250;
 
 %% Constants
 R_earth = 6371000; % radius of earth
-g = 9.81; % gravitational constant
+g = 9.80665; % gravitational constant
 eta_w = 0.2; % eta constant
 rho = 1.225; % air density
 
@@ -21,7 +21,7 @@ alt_runway = 488;
 R_LD = 10; % lift-to-drag ratio
 
 %% Quad Model
-quad_parameters_SLADe;
+quad_parameters_IARTF;
 
 I = [Ixx 0 0 ; 0 Iyy 0 ; 0 0 Izz]; % inertia
 mixin_mat = inv(virtual_controls_mat); % mixin matrix
@@ -29,7 +29,7 @@ max_T = max_total_T / 4; % maximum thrust per motor
 hover_T = max_total_T * hover_perc; % hover thrust (total)
 
 %% Quad Control
-controller_gains_SLADe;
+controller_gains_IARTF;
 
 %% Read PX4 Log
 read_px4_log;
@@ -140,7 +140,7 @@ if is_step == true
     eval([step_input '_step_val = step_sp(numel(step_sp))']);
     sim_time = time_sp(numel(time_sp));
     
-    sim px4_controllers.slx;
+    sim px4_controllers_IARTF.slx;
     sim_out = eval(['sim_' step_input]);
     plot(time_sp, step_sp, time, step, sim_out.time, sim_out.data);
     legend("step", "px4", "matlab");
