@@ -1,9 +1,10 @@
 %% Simulation
-step_input = 'pitch_rate';
+step_input = 'vx';
 %step_input = 'none';
 
-latest = 0;
+latest = 1;
 log_name = "logs/pitch_rate_log.ulg";
+%log_name = "logs/pitch_log.ulg";
 
 sim_time = 30;
 sim_freq = 250;
@@ -15,7 +16,7 @@ eta_w = 0.2; % eta constant
 rho = 1.225; % air density
 
 lat_runway = 47.397742;
-lon_runway = 8.545594;
+lon_runwayWha = 8.545594;
 alt_runway = 488;
 
 R_LD = 10; % lift-to-drag ratio
@@ -132,7 +133,7 @@ end
 
 if is_step == true
     for i = 1:numel(time_sp)
-        if step_sp(i) > step_sp(numel(step_sp)) / 10 % larger than 10% of step
+        if step_sp(i) > step_sp(numel(step_sp)) / 2 % larger than 10% of step
             eval([step_input '_step_time = time_sp(i-1)']);
             break;
         end

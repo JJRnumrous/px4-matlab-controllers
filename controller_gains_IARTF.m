@@ -13,13 +13,35 @@ ned_trim = zeros(3,1) + [0; 0; 0];
 euler_trim = zeros(3,1);
 
 % *************************************************************************
+% PX4 values
+% *************************************************************************
+VelMaxXY = 8;
+VelMaxDn = 4;
+VelMaxUp = 5;
+
+Throttle_Min = 0.1;
+Throttle_Max = 0.94;
+TiltMax = 45*pi/180; %degrees
+
+RollIMax = 0.3;
+PitchIMax = 0.3;
+YawIMax = 0.3;
+
+RollrateMax = 360*pi/180;
+PitchrateMax = 360*pi/180;
+YawrateMax = 200*pi/180;
+
+% *************************************************************************
 % Longitudinal
 % *************************************************************************
 
 % Pitch Rate Controller
-K_q_P = 1.466;
-K_q_I = 0.789;
-K_q_D = 0.0135;
+% K_q_P = 1.466;
+% K_q_I = 0.789;
+% K_q_D = 0.0135;
+K_q_P = 0.13;
+K_q_I = 0.07;
+K_q_D = 0.0012;
 
 % Pitch Angle Controller
 K_theta_P = 8;
@@ -27,9 +49,9 @@ K_theta_I = 0;
 K_theta_D = 0;
 
 % Longitudinal Velocity Controller
-K_u_P = 1.6922;
-K_u_I = 0.2256;
-K_u_D = 0.1128;
+K_u_P = 0.15;
+K_u_I = 0.02;
+K_u_D = 0.01;
 
 % Longitudinal Position Controller
 K_n_P = 1.5;
@@ -41,9 +63,9 @@ K_n_D = 0;
 % *************************************************************************
 
 % Roll Rate Controller
-K_p_P = 1.466;
-K_p_I = 0.789;
-K_p_D = 0.0135;
+K_p_P = 0.13;
+K_p_I = 0.07;
+K_p_D = 0.0012;
 
 % Roll Angle Controller
 K_phi_P = 8;
@@ -51,9 +73,9 @@ K_phi_I = 0;
 K_phi_D = 0;
 
 % Lateral Velocity Controller
-K_v_P = 1.6922;
-K_v_I = 0.2256;
-K_v_D = 0.1128;
+K_v_P = 0.15;
+K_v_I = 0.02;
+K_v_D = 0.01;
 
 % Lateral Position Controller
 K_e_P = 1.5;

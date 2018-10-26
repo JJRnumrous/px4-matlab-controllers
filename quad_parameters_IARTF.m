@@ -21,3 +21,4 @@ max_total_T = 2*m*g; % max thrust (total)
 
 % Aerodynamic:
 C_D = [0.025; 0.025; 0.025];
+A_D = [1; 1; 1];

@@ -4,34 +4,34 @@ virt_T_trim_norm = virt_T_trim ./ (max_T);
 
 
 % Longitudinal Dynamic ________________[d_E, q, theta, u]__________________
-matLongA     = [-1/tau, 0,  0, 0;
+matLongA     = [-1/tau_T, 0,  0, 0;
                 d/Iyy , 0,  0, 0;
                 0     , 1,  0, 0;
                 0     , 0, -g, 0];
             
-matLongB     = [1/tau ; 0; 0; 0];
+matLongB     = [1/tau_T ; 0; 0; 0];
 
 % lateral Dynamic _____________________[d_A, p, phi, v]____________________
-matLatA      = [-1/tau, 0,  0, 0;
+matLatA      = [-1/tau_T, 0,  0, 0;
                 d/Ixx , 0,  0, 0;
                 0     , 1,  0, 0;
                 0     , 0,  g, 0];
 
-matLatB      = [1/tau ; 0; 0; 0];
+matLatB      = [1/tau_T ; 0; 0; 0];
 
 % Directional Dynamic __________________[d_R, r, psi]______________________
-matDirA      = [-1/tau         , 0,  0;
+matDirA      = [-1/tau_T         , 0,  0;
                 r_D/(R_LD*Izz) , 0,  0;
                 0              , 1,  0];
 
-matDirB      = [1/tau ; 0; 0];
+matDirB      = [1/tau_T ; 0; 0];
 
 % Heave Dynamic ________________________[d_T, w, D]________________________
-matHevA      = [-1/tau , 0,  0;
+matHevA      = [-1/tau_T , 0,  0;
                 -1/m   , 0,  0;
                 0      , 1,  0];
 
-matHevB      = [1/tau ; 0; 0];
+matHevB      = [1/tau_T ; 0; 0];
 
 s =tf('s');
 %% Longitude
@@ -57,6 +57,7 @@ C_u = [0,0,0,1];
 G_u = C_u * ((s.*eye(4) - matTheA) \ matLongB);
 % rltool(G_u);
 K_u = K_u_P + K_u_I/s + K_u_D*s;
+K_u = (m*g).*K_u;
 % - PID
 matVelA = [matTheA+matLongB*K_u*C_u, zeros(4,1);
             0, 0, 0, 1, 0];
